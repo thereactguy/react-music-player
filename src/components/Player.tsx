@@ -6,17 +6,31 @@ import { fetchPlaylist, PlaylistContext } from "../context/PlayerProvider";
 const Player = () => {
   const [playlist, setPlaylist] = useState<any>([]);
   const [currentTrack, setCurrentTrack] = useState(0);
+  const [playItem, setPlayItem] = useState<any>([]);
+
+  const manageTrack = (id: any) => {
+    playlist.map((item: any) => {
+      if (item.id === id) {
+        setPlayItem(item);
+      }
+    });
+  };
 
   const handleChangeTrack = (id?: any) => {
+    manageTrack(id);
     setCurrentTrack(id);
   };
 
   const handlePrev = () => {
-    console.log("clicked");
-    return 0;
+    let newItem = currentTrack - 1;
+    manageTrack(newItem);
+    setCurrentTrack(newItem);
   };
+
   const handleNext = () => {
-    console.log("clicked");
+    let newItem = currentTrack + 1;
+    manageTrack(newItem);
+    setCurrentTrack(newItem);
   };
 
   const handleFetchData = async () => {
@@ -32,8 +46,12 @@ const Player = () => {
     <>
       <PlaylistContext.Provider value={{ handlePrev, handleNext }}>
         <main data-testid="mainPart">
-          <SongList onChangeTrack={handleChangeTrack} playlist={playlist} />
-          <Controlbar track={currentTrack} />
+          <SongList
+            onChangeTrack={handleChangeTrack}
+            playlist={playlist}
+            track={currentTrack}
+          />
+          <Controlbar playItem={playItem} />
         </main>
       </PlaylistContext.Provider>
     </>

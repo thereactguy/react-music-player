@@ -1,11 +1,16 @@
 import React from "react";
 import styled from "styled-components";
+import { PlaylistContext } from "../context/PlayerProvider";
 
 export interface ControllPanel {
-  track?: any;
+  playItem?: {
+    title?: string;
+    author: string;
+  };
 }
 
-const controlBar: React.FC<ControllPanel> = ({ track }) => {
+const controlBar: React.FC<ControllPanel> = ({ playItem }) => {
+  // const [currentTract, setCurrentTrack] = React.useState();
   const Button = styled.button`
     color: palevioletred;
     font-size: 1rem;
@@ -13,6 +18,7 @@ const controlBar: React.FC<ControllPanel> = ({ track }) => {
     padding: 8px 16px;
     border: 2px solid palevioletred;
     border-radius: 3px;
+    cursor: pointer;
   `;
 
   const BottomPanel = styled.div`
@@ -28,15 +34,28 @@ const controlBar: React.FC<ControllPanel> = ({ track }) => {
     color: #777;
     margin: 0;
   `;
-  console.log("track", track);
+
+  // playlist?.map((playItem) => {
+  //   if (playItem?.id === track) {
+  //     setCurrentTrack(playItem);
+  //   }
+  // });
 
   return (
-    <BottomPanel>
-      <SongName>Author Name - Song Name</SongName>
-      <Button>Prevoius</Button>
-      <Button>Next</Button>
-      <Button>Not replaying</Button>
-    </BottomPanel>
+    <PlaylistContext.Consumer>
+      {(value: any) => (
+        <>
+          <BottomPanel>
+            <SongName>
+              {playItem?.author} - {playItem?.title}
+            </SongName>
+            <Button onClick={value?.handlePrev}>Prevoius</Button>
+            <Button onClick={value?.handleNext}>Next</Button>
+            <Button>Not replaying</Button>
+          </BottomPanel>
+        </>
+      )}
+    </PlaylistContext.Consumer>
   );
 };
 
