@@ -1,16 +1,8 @@
 import React from "react";
 import styled from "styled-components";
-import { PlaylistContext } from "../context/PlayerProvider";
+import { PlaylistProvider } from "../context/PlayerProvider";
 
-export interface ControllPanel {
-  playItem?: {
-    title?: string;
-    author: string;
-  };
-}
-
-const controlBar: React.FC<ControllPanel> = ({ playItem }) => {
-  // const [currentTract, setCurrentTrack] = React.useState();
+const controlBar = () => {
   const Button = styled.button`
     color: palevioletred;
     font-size: 1rem;
@@ -35,27 +27,21 @@ const controlBar: React.FC<ControllPanel> = ({ playItem }) => {
     margin: 0;
   `;
 
-  // playlist?.map((playItem) => {
-  //   if (playItem?.id === track) {
-  //     setCurrentTrack(playItem);
-  //   }
-  // });
-
   return (
-    <PlaylistContext.Consumer>
+    <PlaylistProvider.Consumer>
       {(value: any) => (
         <>
           <BottomPanel>
             <SongName>
-              {playItem?.author} - {playItem?.title}
+              {value?.playItem.author} - {value?.playItem.title}
             </SongName>
             <Button onClick={value?.handlePrev}>Prevoius</Button>
             <Button onClick={value?.handleNext}>Next</Button>
-            <Button>Not replaying</Button>
+            <Button onClick={value?.handleMode}>{value.currentMode}</Button>
           </BottomPanel>
         </>
       )}
-    </PlaylistContext.Consumer>
+    </PlaylistProvider.Consumer>
   );
 };
 

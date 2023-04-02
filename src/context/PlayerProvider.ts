@@ -8,4 +8,4 @@ export const fetchPlaylist = () => {
   });
 };
 
-export const PlaylistContext = React.createContext({});
+export const PlaylistProvider = React.createContext({});

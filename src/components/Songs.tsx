@@ -1,13 +1,8 @@
 import React from "react";
 import styled from "styled-components";
+import { PlaylistProvider } from "../context/PlayerProvider";
 
-export interface PlayList {
-  track?: any;
-  onChangeTrack(id?: any): void;
-  playlist: any[];
-}
-
-const SongList: React.FC<PlayList> = ({ onChangeTrack, track, playlist }) => {
+const Songs = () => {
   const ListBlock = styled.div`
     display: block;
     background: #000;
@@ -29,19 +24,33 @@ const SongList: React.FC<PlayList> = ({ onChangeTrack, track, playlist }) => {
   `;
 
   return (
-    <ListBlock>
-      {playlist &&
-        playlist.map((playItem) => (
-          <SongItem
-            onClick={() => onChangeTrack(playItem.id)}
-            className={track === playItem.id ? "active" : ""}
-          >
-            {playItem.title}
-            <span className="authorName">{playItem.author}</span>
-          </SongItem>
-        ))}
-    </ListBlock>
+    <PlaylistProvider.Consumer>
+      {(value: any) => (
+        <ListBlock>
+          {value?.playlist &&
+            value?.playlist.map((playItem: any) => (
+              <SongItem
+                onClick={() => value?.handleChangeTrack(playItem.id)}
+                className={value.currentTrack === playItem.id ? "active" : ""}
+              >
+                <audio
+                  id="audioPlayer"
+                  preload="metadata"
+                  autoPlay={value.currentTrack === playItem.id ? true : false}
+                  loop={false}
+                >
+                  <source src={playItem?.url} type="audio/ogg" />
+                  Ooops, your browser is sooo old.
+                </audio>
+
+                {playItem.title}
+                <span className="authorName">{playItem.author}</span>
+              </SongItem>
+            ))}
+        </ListBlock>
+      )}
+    </PlaylistProvider.Consumer>
   );
 };
 
-export default SongList;
+export default Songs;
