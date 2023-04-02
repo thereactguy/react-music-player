@@ -1,31 +1,27 @@
 export const SongList = [
   {
+    title: "My heart will go on",
+    author: "Celine Dion",
     id: 1,
-    title: "Lazy beat",
-    author: "Before Coffee Drummer",
-    url: "",
-    // url: "https://upload.wikimedia.org/wikipedia/commons/2/2e/My_heart_will_go_on.ogg",
+    url: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3",
   },
   {
+    title: "Court of the Crimson King",
+    author: "King Crimson",
     id: 2,
-    title: "Blasting beat",
-    author: "The ADHD Drummer",
-    // url: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3",
-    url: "",
+    url: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3",
   },
   {
+    title: "Owner of lonely heart",
+    author: "Yes",
     id: 3,
-    title: "Lazy beat",
-    author: "Before Coffee Drummer",
-    // url: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3",
-    url: "",
+    url: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3",
   },
   {
+    title: "The Wizard",
+    author: "Black Sabbath",
     id: 4,
-    title: "Blasting beat",
-    author: "The ADHD Drummer",
-    // url: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-4.mp3",
-    url: "",
+    url: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-4.mp3",
   },
 ];
 

@@ -5,9 +5,14 @@ import { PlaylistProvider } from "../context/PlayerProvider";
 const Songs = () => {
   const ListBlock = styled.div`
     display: block;
-    background: #000;
+    background: #222;
     padding: 16px 16px 0;
     text-align: left;
+    max-width: 450px;
+    margin: auto;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    box-shadow: 0 0 4px #444;
   `;
   const SongItem = styled.div`
     display: block;
@@ -29,10 +34,12 @@ const Songs = () => {
         <ListBlock>
           {value?.playlist &&
             value?.playlist.map((playItem: any) => (
+              // Song Listing
               <SongItem
                 onClick={() => value?.handleChangeTrack(playItem.id)}
                 className={value.currentTrack === playItem.id ? "active" : ""}
               >
+                {/* Audio Player */}
                 <audio
                   id="audioPlayer"
                   preload="metadata"
@@ -43,6 +50,7 @@ const Songs = () => {
                   Ooops, your browser is sooo old.
                 </audio>
 
+                {/* Song Info */}
                 {playItem.title}
                 <span className="authorName">{playItem.author}</span>
               </SongItem>

@@ -10,10 +10,12 @@ const Player = () => {
   const [playItem, setPlayItem] = useState<any>([]);
   const [currentMode, setCurrentMode] = useState<any>(playModes[0].mode);
 
+  // Manage Track
   const manageTrack = (id: any) => {
     setPlayItem(playlist.filter((item: any) => item.id === id)[0] || []);
   };
 
+  // Handle Current Mode
   const handleMode = (operationType?: string) => {
     let newItem = 0;
     switch (currentMode) {
@@ -54,23 +56,27 @@ const Player = () => {
     return newItem;
   };
 
+  // Handle the track change
   const handleChangeTrack = (id?: any) => {
     manageTrack(id);
     setCurrentTrack(id);
   };
 
+  // Handle Previous Click
   const handlePrev = () => {
     let newItem = handleMode("prev");
     manageTrack(newItem);
     setCurrentTrack(newItem);
   };
 
+  // Handle Next Click
   const handleNext = () => {
     let newItem = handleMode("next");
     manageTrack(newItem);
     setCurrentTrack(newItem);
   };
 
+  // Fetching Data
   const handleFetchData = async () => {
     const playlist = await fetchPlaylist();
     setPlaylist(playlist);
